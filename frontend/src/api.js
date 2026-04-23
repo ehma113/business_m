@@ -1,9 +1,12 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  // ✅ THIS MAGIC LINE detects if you are local or live
-  baseURL: import.meta.env.VITE_API_URL || 'http://ehma50.pythonanywhere.com/api/'
+  // Removed the VITE_API_URL line for now to force it to use PythonAnywhere
+  baseURL: 'http://ehma50.pythonanywhere.com/api/'
 });
+
+// ✅ ADD THIS LINE to tell the browser to allow the connection
+apiClient.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // This interceptor will automatically add the auth token to every request
 apiClient.interceptors.request.use(
